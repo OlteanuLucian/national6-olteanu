@@ -1,7 +1,4 @@
 console.log("JavaScript - Digital Clock");
-// Using the new knowledge leaned in index.js file we can implement a digital clock
-// The digital clock will use existing html objects in index.html file
-// Using "setInterval" we will calculate the value for seconds, minutes and hours an update the page every second to reflect the time spend on the page
 
 let seconds = 0;
 const secondsParagraphs = document.querySelectorAll(".seconds p");
@@ -12,7 +9,17 @@ const minutesParagraphs = document.querySelectorAll(".minutes p");
 let hours = 0;
 const hoursParagraphs = document.querySelectorAll(".hours p");
 
-setInterval(function () {
+//define variable to hold setInterval() function
+let interval = null;//null because we do not want the function to run when the user loads the page 
+//define variable to hold stopwatch status
+let status = "stopped";
+
+
+
+
+
+//stopwatch function (logic to determine when to increment next value)
+function stopWatch () {
   renderDigits(seconds, secondsParagraphs);
   renderDigits(minutes, minutesParagraphs);
   renderDigits(hours, hoursParagraphs);
@@ -32,8 +39,9 @@ setInterval(function () {
   if (hours === 24) {
     hours = 0;
   }
-}, 1000);
+};
 
+//function to display updated time values to user
 function renderDigits(nr, pList) {
   const stringDigits = nr + "";
   const digitList = stringDigits.split("");
@@ -46,3 +54,40 @@ function renderDigits(nr, pList) {
     pList[1].innerText = digitList[0];
   }
 }
+
+
+//start button
+document.getElementById("button-start").addEventListener("click", startBtn);
+function startBtn(){
+    if (status === "stopped"){
+        //start the stopwatch by calling the setInterval() function
+        interval = window.setInterval(stopWatch, 100);
+        document.getElementById("button-start").innerHTML = "Start";
+        status = "stopped";
+    }
+}
+
+
+//stop button
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ document.getElementById("button-save").addEventListener("click", function(){
+     console.log(`${hours}:${minutes}:${seconds}`);//prints in console
+ });
