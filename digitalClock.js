@@ -1,25 +1,27 @@
 console.log("JavaScript - Digital Clock");
 
-let seconds = 0;
+var seconds = 0;
 const secondsParagraphs = document.querySelectorAll(".seconds p");
 
-let minutes = 0;
+var minutes = 0;
 const minutesParagraphs = document.querySelectorAll(".minutes p");
 
-let hours = 0;
+var hours = 0;
 const hoursParagraphs = document.querySelectorAll(".hours p");
 
-//define variable to hold setInterval() function
-let interval = null;//null because we do not want the function to run when the user loads the page 
-//define variable to hold stopwatch status
-let status = "stopped";
+var t;
+
+// //define variable to hold setInterval() function
+// let interval = null;//null because we do not want the function to run when the user loads the page 
+// //define variable to hold stopwatch status
+// let status = "stopped";
 
 
 
 
 
 //stopwatch function (logic to determine when to increment next value)
-function stopWatch () {
+function startTimer () {
   renderDigits(seconds, secondsParagraphs);
   renderDigits(minutes, minutesParagraphs);
   renderDigits(hours, hoursParagraphs);
@@ -57,26 +59,48 @@ function renderDigits(nr, pList) {
 
 
 //start button
-document.getElementById("button-start").addEventListener("click", startBtn);
-function startBtn(){
-    if (status === "stopped"){
-        //start the stopwatch by calling the setInterval() function
-        interval = window.setInterval(stopWatch, 100);
-        document.getElementById("button-start").innerHTML = "Start";
-        status = "stopped";
-    }
+// document.getElementById("button-start").addEventListener("click", startBtn);
+// function startBtn(){
+//     // if (status === "stopped"){
+//         //start the stopwatch by calling the setInterval() function
+//         interval = window.setInterval(stopWatch, 100);
+//         // document.getElementById("button-start").innerHTML = "Start";
+//     //     status = "stopped";
+//     // }
+// };
+
+
+// //stop button
+// document.getElementById("button-stop").addEventListener("click", stopBtn);
+// function stopBtn(){
+//     if (status === "started"){
+//         //start the stopwatch by calling the setInterval() function
+//         window.clearInterval(interval);
+       
+//     }
+// };
+
+document.getElementById("button-start").addEventListener("click", startTime);
+function startTime(){
+    t = setInterval(startTimer,100);
+    // document.getElementById("button-start").disabled = true;
 }
 
+document.getElementById("button-stop").addEventListener("click", stopTime);
+function stopTime(){
+    clearInterval(t);
+    // document.getElementById("button-start").disabled = true;
+}
 
-//stop button
-
-
-
-
-
-
-
-
+document.getElementById("button-reset").addEventListener("click", resetTime);
+function resetTime(){
+    clearInterval(t);
+    seconds = 0;
+    minutes = 0;
+    hours = 0;
+    secondsParagraphs.innerHTML = seconds;
+    minutesParagraphs.innerHTML = minutes;
+}
 
 
 
