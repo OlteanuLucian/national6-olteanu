@@ -10,9 +10,8 @@ let hours = 0;
 const hoursParagraphs = document.querySelectorAll(".hours p");
 
 let t;
-var split = null;
-var interval = null;
-var times = document.getElementById('times');
+
+
 // //define variable to hold setInterval() function
 // let interval = null;//null because we do not want the function to run when the user loads the page 
 // //define variable to hold stopwatch status
