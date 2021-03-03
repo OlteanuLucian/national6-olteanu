@@ -1,11 +1,21 @@
 .digital-clock {
-    display: flex;
-  }
+  display: flex;
+  font-size:15px;
+}
   
-  .digital-clock > div {
-    display: flex;
-  }
-  
-  .split-time { /* time of last split */
-    font-size: 15px;
-  }
+.digital-clock > div {
+  display: flex;
+  margin-top:10px;
+}
+
+ul { 
+  list-style: none;
+  padding: 0px;
+  margin:10px 0px 10px 0px;
+}
+
+li{
+  display: flex;
+  font-size: 15px;
+  padding:  10px 0px 10px 0px;
+}
