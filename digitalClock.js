@@ -73,8 +73,8 @@ document.getElementById("button-reset").addEventListener("click", resetTime);
   }
 
 //  Split function when click on Save btn
-let splitTime = document.getElementById('button-save');
-let split = document.getElementById('laps');
-splitTime.onclick = function() {
-  split.innerHTML += "<li>" + " " + hrs.innerHTML +  min.innerHTML +  sec.innerHTML + "</li>";
-}
+document.getElementById("button-save").addEventListener("click", splitTime);
+  function splitTime(){
+    let split = document.getElementById('laps');
+    split.innerHTML += "<li>" + " " + hrs.innerHTML +  min.innerHTML +  sec.innerHTML + "</li>";
+  }
