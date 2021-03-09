@@ -61,3 +61,4 @@ function renderArticle(articleData) {
   articleTitle.innerText = articleData.title;
   articleContent.innerText = articleData.content;
 }
+
