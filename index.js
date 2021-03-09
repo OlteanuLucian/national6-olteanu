@@ -7,8 +7,7 @@ console.log("JavaScript - AJAX");
 const articleListHtml = document.querySelector(".article-list");
 
 // we will get/fetch the data when user click on a button
-document.getElementById("get-data").addEventListener("click", getData);
- function getData() {
+document.getElementById("get-data").addEventListener("click", function () {
   // "fetch" is a JavaScript function that tells the browser the make a request the specified address in the argument
   fetch("https://simple-json-server-scit.herokuapp.com/posts")
     // "this .then" is responsible for linking a callback function to the event trigger by the browser when the server responds back
@@ -16,7 +15,7 @@ document.getElementById("get-data").addEventListener("click", getData);
     // "this .then" is responsible for linking a callback function to the event trigger by the parser of the body of the response
     // we need to parse the response so we can transform it from a string in form of a JSON to an actual JavaScript value, which in this case is a list of objects
     .then(useJSONResponse);
-};
+});
 
 // because "handleFetchResponse" is used as a callback function in the first then of "fetch" the parameter will be the response from the servers
 function handleFetchResponse(response) {
