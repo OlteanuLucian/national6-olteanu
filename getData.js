@@ -94,7 +94,6 @@ function renderArticle(articleData) {
   editButton.addEventListener("click", function(){
     if (editButton.innerText=="Edit"){
 
-    
     articleTitle.style.display = "none";
     articleTitleInput.style.display = "block";
     articleContent.style.display = "none";
