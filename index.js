@@ -23,7 +23,7 @@ function renderArticles(articleList) {
 	for (const articleData of articleList) {
 		console.log(articleData);
 		renderArticle(articleData);
-		getUserComms(articleData.id); //introducing comments
+		getComms(articleData.id); 
 	}
 }
 
@@ -31,8 +31,7 @@ function renderArticle(articleData) {
 	const article = document.createElement("div");
 	const articleTitle = document.createElement("h3");
 	const articleContent = document.createElement("p");
-	const commentsList = document.createElement("div"); //variable for comms container
-
+	
 	article.appendChild(articleTitle);
 	article.appendChild(articleContent);
 
@@ -41,51 +40,54 @@ function renderArticle(articleData) {
 	articleTitle.innerText = articleData.title;
 	articleContent.innerText = articleData.content;
 
-	commentsList.classList.add("comments-list"); //adding class for comms rendering
-	article.appendChild(commentsList);
+	const commsList = document.createElement("div"); 
+	commsList.classList.add("comments-list");
+
+	article.appendChild(commsList);
 }
 
-function getUserComms(commentData) {
+function getComms(dataCommParams) {
 	fetch(
 		"https://simple-json-server-scit.herokuapp.com/comments?postId=" +
-			commentData
-	) //fetching comments source url
-		.then(handleFetchComms) //HTTP response contained in a returned promise
-		.then(useJSONComms); ////JSON method =>extracts the JSON body content from the http response; function declared below
+			dataCommParams
+	)
+		.then(handleFetchComms)
+		.then(useJSONComms);
 }
 
 function handleFetchComms(response) {
-	console.log("Response", response);
+	console.log(response);
 	return response.json();
 }
 
 function useJSONComms(json) {
 	console.log(json);
-	renderComms(json); //function declared below
+	renderComms(json);
 }
 
-function renderComms(commsTextList) {
-	for (const commsText of commsTextList) {
-		renderComms(commsText);
+function renderComms(commsDataList) {
+	for (const commsData of commsDataList) {
+		renderComm(commsData);
 	}
 }
 
-function renderComms (commsText){ //function to render comms in DOM
-  const containerList = document.querySelectorAll(".comments-list")
-  const comment = document.createElement("div");
-  comment.classList.add("comment");
-  comment.style.padding="0px 0px 0px 20px";
+function renderComm(commsData) {
+	const containerList = document.querySelectorAll(".comments-list");
 
-  const commPostUser = document.createElement("h4");
-  commPostUser.classList.add("comment-user");
-  
-  const commContent = document.createElement("p");
-  commContent.classList.add("comment-content");
+	const comment = document.createElement("div");
+	comment.classList.add("comment");
+	comment.style.padding = "0px 0px 0px 20px";
 
-  containerList[commsText.postId].appendChild(comment);
-  comment.appendChild(commPostUser);
-  comment.appendChild(commContent);
+	const commsUser = document.createElement("h4");
+	commsUser.classList.add("comment-user");
 
-  commPostUser.innerText = commsText.username;
-  commContent.innerText = commsText.content;
+	const commsContent = document.createElement("p");
+	commsContent.classList.add("comment-content");
+
+	containerList[commsData.postId].appendChild(comment);
+	comment.appendChild(commsUser);
+	comment.appendChild(commsContent);
+
+	commsUser.innerText = commsData.username;
+	commsContent.innerText = commsData.content;
 }
