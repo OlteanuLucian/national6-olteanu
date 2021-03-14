@@ -49,7 +49,7 @@ function renderArticle(articleData) {
 function getComms(dataCommParams) {
 	fetch(
 		"https://simple-json-server-scit.herokuapp.com/comments?postId=" +
-			dataCommParams
+		dataCommParams
 	)
 		.then(handleFetchComms)
 		.then(useJSONComms);
