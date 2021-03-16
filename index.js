@@ -105,7 +105,7 @@ const typeOfVehicle = "car";
 class Bike{};  
 
 
-// document.getElementById("generate-car").addEventListener("click", () => {
-//       console.log("generate car");
-// 	const newCar = new Car();//instantiation newCar este o instanta a clasei Car
-// });
+document.getElementById("generate-car").addEventListener("click", () => {
+      console.log("generate car");
+	const newCar = new CarAuto();//instantiation newCar este o instanta a clasei Car
+});

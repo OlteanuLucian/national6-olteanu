@@ -4,7 +4,7 @@ document.getElementById("generate-car").addEventListener("click", () => {
 	const newCar = new Car();
 });
 
-class Car {
+class CarAuto {
 	constructor() {
 		this.runningEngine = false;
 		this.position = 0;
