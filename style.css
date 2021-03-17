@@ -1,34 +1,42 @@
-#generate-car{
-    display:block;
+body {
+      background-color: lightgray;
 }
 
-.car{
-    height: 100px;
-    display: block;
-    transition: all 0.3s ease;
+#navbar {
+      position: relative;
+      width:100%;
+      display: flex;
+      background-color:#6b6b6b ;
 }
 
-.car--started{
-    animation: carAnimation 0.3s ease infinite;
+img {
+      /* position:absolute; */
+      height:50px;
+      width: 50px;
+      padding-left:20px;
+      padding-top:3px;
+
 }
 
-@keyframes carAnimation{
-    0%{
-        transform: translateX(0px);
-    }
-    25%{
-        transform: translateX(2px);
-    }
+h3 { padding-left: 50px;
+      font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+      font-weight: bold;
+}
 
-    50%{
-        transform: translateX(0px);
-    }
+#my-form {
+     
+}
+input {
+      height: 20px;
+}
 
-    75%{
-        transform: translateX(-2px);
-    }
+#add-item {
+      height: 30px;
+      width:30px;
+      cursor: pointer;
+}
 
-    100%{
-        transform: translateX(-2px);
-    }
+#add-item:focus {
+      border: none;
+      background-color: light;
 }
