@@ -68,11 +68,32 @@ body {
 
 
 
-#task-list li{
+
+
+.taskStyle {
+      display: flex;
+      align-items: center;
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+/* #task-list li{
       list-style-type:none;
   }
 
 .add-task{
       height: 30px !important;
       width: 30px !important;
-}
+} */
+
+
+
