@@ -18,7 +18,7 @@ class GameObject{
         this.ref.style.position = "absolute";
         this.ref.style.top = 0;
         this.ref.style.left = 0;
-
+        
         document.getElementById("game-scene").appendChild(this.ref);
     }
     move(x, y){
@@ -26,6 +26,7 @@ class GameObject{
         this.y = y;
         this.ref.style.transform =`translate(${this.x}px, ${this.y}px)`;//muta obiectul dupa aceste coord
     }
+    
 }
 
 class Player  extends GameObject {
@@ -36,12 +37,17 @@ class Player  extends GameObject {
     }
 
     moveUp() {
-        this.move(this.x, this.y-25);
+        
+        if(this.y - 25 >= 0) this.move(this.x, this.y - 25);//conditie sa nu scoatem player in afara game scene
     }
+
     moveDown() {
-        this.move(this.x, this.y+25);
+        if(this.y + 25 <= 500 - this.height) this.move(this.x, this.y + 25);//conditie sa nu scoatem player in afara game scene
     }
+
+
 }
+
 
 class Obstacle extends GameObject{
     constructor() {
@@ -67,15 +73,15 @@ class ObstacleFactory {
     }
     //making obstacles disappear outside the scene
     destroyObstacles() {
-        this.obstacles = this.obstacles.filter((obstacle)=> {
-            if (obstacle.x < -50) {
-                obstacle.removeRef();//sterge obiectul JS
-                return false;
-            }
-
-            return true;
+        this.obstacles = this.obstacles.filter((obstacle) => {
+          if (obstacle.x < -50) {
+            obstacle.removeRef();//removes the JS object
+            return false;//fiind filtrat la return false JS sterge obiectul
+          }
+    
+          return true;
         });
-    }
+      }
 
     moveObstacles(){
             for(const obstacle of this.obstacles) {
@@ -88,22 +94,26 @@ class ObstacleFactory {
     }
 }
 
+
 ///collision detection
-
 function collisionDetection(player, obstacles) {
-    for(const obstacle of obstacles) {
-        
-        if ((player.x >= (obstacle.x - obstacle.width)) &&
-            ((player.x + player.width) >= obstacle.x) && 
-            (player.y <= (obstacle.y + obstacle.height)) && 
-            ((player.y + player.height) >= obstacle.y) )   
-        return true;
-    }
+  for (const obstacle of obstacles) {
+    console.log(player.x, player.x + player.width, obstacle.x);
 
-    return false;
+    if (
+      (player.x <= obstacle.x &&
+        obstacle.x <= player.x + player.width &&
+        player.y <= obstacle.y &&
+        obstacle.y <= player.y + player.height) ||
+      (player.x <= obstacle.x + obstacle.width &&
+        obstacle.x + obstacle.width <= player.x + player.width &&
+        player.y <= obstacle.y + obstacle.height &&
+        obstacle.y + obstacle.height <= player.y + player.height)
+    )
+      return true;
+  }
+  return false;
 }
-
-
 
 //User  Input
 let keyUpPress = false;
@@ -129,15 +139,12 @@ document.addEventListener("keyup", (event) => {
 });
 
 
-///--------------------
-
+//-------------------------------//
 
 
 //instantiate Player, Obstacle 
 const player = new Player();
-//const obstacle = new Obstacle();
 const obstacleFactory=new ObstacleFactory();
-
 
 
 //-GAME LOOP----cream un loop pentru miscarea obstacolelor
@@ -148,10 +155,9 @@ let gameLoop = setInterval(()=>{
 
     if(keyUpPress)player.moveUp();
     if(keyDownPress)player.moveDown();
+
     if (count % 10 === 0)obstacleFactory.createObstacle();
-    //moving the obstacles
-//     obstacle.moveLeft();
-// }, 250);//setInterval apeleaza functia la fiecare 250 milisec
+    //setInterval apeleaza functia creandu-se obstacole la fiecare X  milisec
 
 obstacleFactory.moveObstacles();
 
@@ -163,4 +169,4 @@ if(collisionDetection (player, obstacleFactory.obstacles)) {
 
 obstacleFactory.destroyObstacles();
 count++;
-}, 100);
+}, 50);
