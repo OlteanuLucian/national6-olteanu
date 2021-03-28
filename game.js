@@ -1,3 +1,5 @@
+console.log("Spaceship Game--JavaScript OOP")
+
 class Spaceship {
     constructor() {
         this.xPosition = 0;
