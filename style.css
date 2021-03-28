@@ -1,11 +1,12 @@
 body {
-    width: 100%;
-    height: 100%;
+    display: flex;
+    flex-direction: column;
 }
+
 
 #generate-starship {
     display: block;
-   
+   width: 150px;
 }
 
 .starship {
@@ -13,7 +14,6 @@ body {
     width: 50px;
     display: block;
     margin: 10px;
-    float: left;
-    
+    padding: 10px;
 }
 
