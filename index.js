@@ -1,53 +1,30 @@
-// document.addEventListener("click",() => {
-//     console.log("click");
-// });
+console.log(window.open);
 
-// setTimeout(() => {
-//     console.log("time end");
+document.getElementById("open").addEventListener("click", ()=>{
+    window.open("https://www.google.com")//la click deschide o noua fereastra
+});
 
-// }, 1000);
-
-// const interval = setInterval(()=>{
-//     console.log("ping")
-// }, 2000);
-
-// clearInterval(interval);
+document.getElementById("close").addEventListener("click", ()=>{
+    window.close("https://www.google.com")
+});//la click inchide tab-ul
 
 
+setTimeout(() => {
+    console.log("focus");
+    window.focus()
+}, 3000);
 
-///we need to call "secondStep only after "firstStep" ended
+window.addEventListener("load", ()=>{
+    console.log("all is loaded");
+});
 
-// function firstStep() {
-//     setTimeout(() => {
-//         console.log("End of first step");
-//         secondStep();
-//     }, 2000);
-
-// }
-
-// function secondStep() {
-//     setTimeout(()=>{
-//         console.log("End of second step");
-//         thirdStep();
-//     }, 1000);
-// }
-
-// function thirdStep() {
-//     setTimeout(()=>{
-//         console.log("End of third step");
-//     }, 500);
-// }
-
-// firstStep();
+window.addEventListener("resize", (event) => {
+    console.log(event);//cand se face resize la pagina event is triggered
+});
 
 
+document.getElementById("redirect").addEventListener("click",() => {
+    window.location = "https://google.com"
+});
 
-///PROMISES
 
-function firstStep() {
-    return new Promise
-    setTimeout(() => {
-        console.log("End of first step");
-        secondStep();
-    }, 2000);
-}
