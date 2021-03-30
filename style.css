@@ -10,10 +10,3 @@ body {
   align-items: center;
   justify-content: center;
 }
-#game-scene {
-  width: 1000px;
-  height: 500px;
-  border: 1px solid grey;
-  position: relative;
-  overflow: hidden;/*tot ce e in afara game-scene este ascuns*/
-}

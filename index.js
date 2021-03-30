@@ -1,34 +1,53 @@
-console.log("Javascript OOP Game")
+// document.addEventListener("click",() => {
+//     console.log("click");
+// });
 
-//recap:
+// setTimeout(() => {
+//     console.log("time end");
 
-//object literal
-//this comes from Object class
-const obj = {};
-const a = new Object();
-console.log(a);
+// }, 1000);
 
-//this comes from Array CLass
-const b =[];
+// const interval = setInterval(()=>{
+//     console.log("ping")
+// }, 2000);
 
-class Car{
-    constructor(color){
-        this.color=color;    
-    }
-    startCar(){
-        console.log("Start Car");
-    }
+// clearInterval(interval);
+
+
+
+///we need to call "secondStep only after "firstStep" ended
+
+// function firstStep() {
+//     setTimeout(() => {
+//         console.log("End of first step");
+//         secondStep();
+//     }, 2000);
+
+// }
+
+// function secondStep() {
+//     setTimeout(()=>{
+//         console.log("End of second step");
+//         thirdStep();
+//     }, 1000);
+// }
+
+// function thirdStep() {
+//     setTimeout(()=>{
+//         console.log("End of third step");
+//     }, 500);
+// }
+
+// firstStep();
+
+
+
+///PROMISES
+
+function firstStep() {
+    return new Promise
+    setTimeout(() => {
+        console.log("End of first step");
+        secondStep();
+    }, 2000);
 }
-//extends ia tot ce are clasa Car si adauga la CarWithElectricWindows 
-class CarWithElectricWindows  extends Car{
-    openElectricWindows(windowNr) {
-        console.log("Opening window ", windowNr);
-    }
-}
-
-const car1 = new Car("white");
-console.log(car1);
-const car2 = new CarWithElectricWindows("black");
-console.log(car2);
-car2.startCar();
-car2.openElectricWindows(3);
