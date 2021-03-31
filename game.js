@@ -27,13 +27,19 @@ class GameObject{
         this.ref.style.transform =`translate(${this.x}px, ${this.y}px)`;//muta obiectul dupa aceste coord
     }
     
+    removeRef() {
+        this.ref.remove();
+    }
 }
 
 class Player  extends GameObject {
-    constructor() {
+    constructor(availableLives) {
         super();//cuvant cheie care apeleaza si constructorul clasei de baza GameObject pe langa constructorul clasei Player
         this.ref.style.background ="blue";
         this.move(50,225);
+        this.life=[];
+        this.addLife(availableLives);
+        this.removeLife;
     }
 
     moveUp() {
@@ -44,7 +50,21 @@ class Player  extends GameObject {
     moveDown() {
         if(this.y + 25 <= 500 - this.height) this.move(this.x, this.y + 25);//conditie sa nu scoatem player in afara game scene
     }
-
+    addLife(availableLives){
+        const lifeStock = document.getElementById("life-stock");
+            for(let i=0; i<availableLives; i++) {
+                const lifeRef = document.createElement("div");
+                const lifeIcon = document.createElement("img");
+                lifeIcon.setAttribute("src", "heart.png");
+                lifeIcon.classList.add("heart");
+                lifeRef.appendChild(lifeIcon);
+                lifeStock.appendChild(lifeRef);
+                this.life.push(lifeRef);
+        }
+    }
+    removeLife(){
+        this.life.pop().remove();
+    }
 
 }
 
