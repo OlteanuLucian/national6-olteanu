@@ -8,7 +8,8 @@ body {
 body {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content:space-around;
+  flex-wrap: wrap;
 }
 
 #game-scene {
@@ -22,6 +23,14 @@ body {
 #life-stock {
   display: flex;
   justify-content: center;
+  align-items: center;
+}
+#life-div {
+  display: block;
+  flex-wrap: wrap;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
 }
 .heart {
   width: 30px;

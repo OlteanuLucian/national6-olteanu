@@ -163,12 +163,14 @@ document.addEventListener("keyup", (event) => {
 
 
 //instantiate Player, Obstacle 
-const player = new Player();
-const obstacleFactory=new ObstacleFactory();
+let life = 3;
+const player = new Player(life);
 
+const obstacleFactory=new ObstacleFactory();
+let count = 0;
 
 //-GAME LOOP----cream un loop pentru miscarea obstacolelor
-let count = 0;
+
 
 let gameLoop = setInterval(()=>{
     console.log(keyUpPress);
@@ -181,9 +183,13 @@ let gameLoop = setInterval(()=>{
 
 obstacleFactory.moveObstacles();
 
-if(collisionDetection (player, obstacleFactory.obstacles)) {
+if (collisionDetection(player, obstacleFactory.obstacles)) {
+    player.removeLife();
+  }
+
+if(player.life.length===0) {
     clearInterval(gameLoop);
-    alert("You have been hit");
+    alert("You lost");
     window.location = "/";
 }
 
