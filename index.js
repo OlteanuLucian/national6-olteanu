@@ -1,10 +1,14 @@
 console.log("JavaScript-Cookies & Local Storage");
 
+<<<<<<< Updated upstream
 console.log(document.cookie);
 
 //document.cookie = "test=123";
 
 if(!document.cookie) {
+=======
+if(!localStorage.getItem("name") || ! localStorage.getItem("password")) {
+>>>>>>> Stashed changes
     window.location = "/login.html";
 }
 
