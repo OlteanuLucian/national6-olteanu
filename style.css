@@ -46,3 +46,6 @@ body {
     width: 100px;
 }
 
+#login {
+    float: right;
+}
