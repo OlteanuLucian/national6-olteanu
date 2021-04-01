@@ -2,7 +2,16 @@ console.log("JavaScript-Cookies & Local Storage");
 
 console.log(document.cookie);
 
+
+
+if(!localStorage.getItem("name")|| ! localStorage.getItem("password")) {
+    window.location = "/login.html";
+}
+
+
+
 document.getElementById("logout").addEventListener("click",()=> {
-    document.cookie = "password=123Luc; Expires=Wed, 21 Oct 2015 07:28:00 GMT";
-    window.location ="/"// "/"" = root
-})
+  localStorage.removeItem("name")
+  localStorage.removeItem("name")
+  window.location ="/";
+});
