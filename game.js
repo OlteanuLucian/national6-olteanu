@@ -1,13 +1,12 @@
 console.log("I wanna play a game!")
 
-class GameObject{ 
+class GameObject {
     constructor() {
         this.width = 50;
         this.height = 50;
         this.x = 0;
         this.y = 0;
         this.generateRef();
-        //this.move(50, 225)
     }
 
     generateRef() {
@@ -18,69 +17,47 @@ class GameObject{
         this.ref.style.position = "absolute";
         this.ref.style.top = 0;
         this.ref.style.left = 0;
-        
+
         document.getElementById("game-scene").appendChild(this.ref);
     }
-    move(x, y){
+    move(x, y) {
         this.x = x;
         this.y = y;
-        this.ref.style.transform =`translate(${this.x}px, ${this.y}px)`;//muta obiectul dupa aceste coord
+        this.ref.style.transform = `translate(${this.x}px, ${this.y}px)`;
     }
-    
-    removeRef() {
-        this.ref.remove();
-    }
+
 }
 
-class Player  extends GameObject {
-    constructor(availableLives) {
-        super();//cuvant cheie care apeleaza si constructorul clasei de baza GameObject pe langa constructorul clasei Player
-        this.ref.style.background ="blue";
-        this.move(50,225);
-        this.life=[];
-        this.addLife(availableLives);
-        this.removeLife;
+class Player extends GameObject {
+    constructor() {
+        super();
+        this.ref.style.background = "blue";
+        this.move(50, 225);
     }
 
     moveUp() {
-        
-        if(this.y - 25 >= 0) this.move(this.x, this.y - 25);//conditie sa nu scoatem player in afara game scene
+        if (this.y - 25 >= 0) this.move(this.x, this.y - 25);
     }
 
     moveDown() {
-        if(this.y + 25 <= 500 - this.height) this.move(this.x, this.y + 25);//conditie sa nu scoatem player in afara game scene
+        if (this.y + 25 <= 500 - this.height) this.move(this.x, this.y + 25);
     }
-    addLife(availableLives){
-        const lifeStock = document.getElementById("life-stock");
-            for(let i=0; i<availableLives; i++) {
-                const lifeRef = document.createElement("div");
-                const lifeIcon = document.createElement("img");
-                lifeIcon.setAttribute("src", "heart.png");
-                lifeIcon.classList.add("heart");
-                lifeRef.appendChild(lifeIcon);
-                lifeStock.appendChild(lifeRef);
-                this.life.push(lifeRef);
-        }
-    }
-    removeLife(){
-        this.life.pop().remove();
-    }
+
 
 }
 
-
-class Obstacle extends GameObject{
+class Obstacle extends GameObject {
     constructor() {
-        super();//cuvant cheie care apeleaza si constructorul clasei de baza GameObject pe langa constructorul clasei Player
+        super();
         this.ref.style.background = "red";
         this.move(1055, 55);
     }
-    moveLeft(){
-        this.move(this.x-5, this.y)
+    moveLeft() {
+        this.move(this.x - 5, this.y)
     };
 }
 
-//generatorul de obstacole
+//---Obstacle Generator
 class ObstacleFactory {
     constructor() {
         this.obstacles = [];
@@ -89,71 +66,97 @@ class ObstacleFactory {
     createObstacle() {
         const obstacle = new Obstacle();
         obstacle.move(1060, Math.floor(Math.random() * 450));
-        this.obstacles.push(obstacle);        
+        this.obstacles.push(obstacle);
     }
-    //making obstacles disappear outside the scene
     destroyObstacles() {
         this.obstacles = this.obstacles.filter((obstacle) => {
-          if (obstacle.x < -50) {
-            obstacle.removeRef();//removes the JS object
-            return false;//fiind filtrat la return false JS sterge obiectul
-          }
-    
-          return true;
+            if (obstacle.x < -50) {
+                obstacle.removeRef();
+                return false;
+            }
+            return true;
         });
-      }
+    }
 
-    moveObstacles(){
-            for(const obstacle of this.obstacles) {
+    moveObstacles() {
+        for (const obstacle of this.obstacles) {
             obstacle.moveLeft();
         }
-    }   
-    //removeRef distruge obiectul HTML. acesta se distruge inaintea oboectului JS
+    }
     removeRef() {
         this.ref.remove();
     }
 }
 
 
-///collision detection
+//---Collision Detection
 function collisionDetection(player, obstacles) {
-  for (const obstacle of obstacles) {
-    console.log(player.x, player.x + player.width, obstacle.x);
+    for(const obstacle of obstacles) {
+        if(
+            obstacle.x === (player.x + player.width) - 25 &&
+            obstacle.y + obstacle.height >= player.y &&
+            obstacle.y <= player.y + player.height
+        )
+        
+        return true;
+    }
 
-    if (
-      (player.x <= obstacle.x &&
-        obstacle.x <= player.x + player.width &&
-        player.y <= obstacle.y &&
-        obstacle.y <= player.y + player.height) ||
-      (player.x <= obstacle.x + obstacle.width &&
-        obstacle.x + obstacle.width <= player.x + player.width &&
-        player.y <= obstacle.y + obstacle.height &&
-        obstacle.y + obstacle.height <= player.y + player.height)
-    )
-      return true;
-  }
-  return false;
+    return false;
 }
 
+class Lives {
+    constructor() {
+        this.currentNumberOfLives = 3;
+        this.livesArray = [];
+        this.generateLives();
+        this.renderLives();
+    }
+
+    generateLives() {
+        for (let i = 0; i < 3; i++) {
+            const life = document.createElement('img');
+            life.src = 'heart.png';
+            life.style.width = '30px';
+            life.style.height = '30px';
+            this.livesArray.push(life);
+        }
+    }
+
+    renderLives() {
+        this.ref = document.createElement('div');
+        this.ref.style.position = 'absolute';
+        this.ref.style.top = '90px';
+
+        document.body.appendChild(this.ref);
+        for (const life of this.livesArray) {
+            this.ref.appendChild(life);
+        }
+    }
+
+    removeLives() {
+        const heart = this.livesArray.pop();
+        heart.remove();
+    }
+}
 //User  Input
 let keyUpPress = false;
 let keyDownPress = false;
 document.addEventListener("keydown", (event) => {
-    if(event.key === "ArrowUp"){
+    if (event.key === "ArrowUp") {
         keyUpPress = true;
     }
 
-    if(event.key ==="ArrowDown"){
+    if (event.key === "ArrowDown") {
         keyDownPress = true;
     }
 });
 
 document.addEventListener("keyup", (event) => {
-    if(event.key === "ArrowUp"){
+    if (event.key === "ArrowUp") {
         keyUpPress = false;
     }
 
-    if(event.key ==="ArrowDown"){
+    if (event.key === "ArrowDown") {
         keyDownPress = false;
     }
 });
@@ -163,36 +166,30 @@ document.addEventListener("keyup", (event) => {
 
 
 //instantiate Player, Obstacle 
-let life = 3;
-const player = new Player(life);
-
-const obstacleFactory=new ObstacleFactory();
-let count = 0;
+const player = new Player();
+const lives = new Lives();
+const obstacleFactory = new ObstacleFactory();
 
 //-GAME LOOP----cream un loop pentru miscarea obstacolelor
+let count = 0;
+let gameLoop = setInterval(() => {
+    if (keyUpPress) player.moveUp();
+    if (keyDownPress) player.moveDown();
 
+    if (count % 10 === 0) obstacleFactory.createObstacle();
 
-let gameLoop = setInterval(()=>{
-    console.log(keyUpPress);
+    obstacleFactory.moveObstacles();
+    
+    if(collisionDetection(player, obstacleFactory.obstacles) && lives.currentNumberOfLives > 1) {       
+        lives.currentNumberOfLives--;
+        lives.removeLives();
+    } else if ((collisionDetection(player, obstacleFactory.obstacles)) && lives.currentNumberOfLives === 1) {
+        clearInterval(gameLoop);
+        alert("You lost");
+        window.location = "/";
+    }
 
-    if(keyUpPress)player.moveUp();
-    if(keyDownPress)player.moveDown();
+    obstacleFactory.destroyObstacles();
 
-    if (count % 10 === 0)obstacleFactory.createObstacle();
-    //setInterval apeleaza functia creandu-se obstacole la fiecare X  milisec
-
-obstacleFactory.moveObstacles();
-
-if (collisionDetection(player, obstacleFactory.obstacles)) {
-    player.removeLife();
-  }
-
-if(player.life.length===0) {
-    clearInterval(gameLoop);
-    alert("You lost");
-    window.location = "/";
-}
-
-obstacleFactory.destroyObstacles();
-count++;
+    count++;
 }, 50);
