@@ -9,3 +9,20 @@ document.getElementById("logout").addEventListener("click", () => {
   localStorage.removeItem("password");
   window.location = "/";
 });
+
+
+const breedsURL = "https://dog.ceo/api/breeds/list/all";
+const selectBreed = document.getElementById ("breeds");
+
+fetch (breedsURL)
+.then(res => {
+  return res.json();
+})
+.then (data => {
+  const breedsObject = data.message;
+  const breedsArray = Object.keys(breedsObject);
+  for (let i = 0; i < breedsArray.length; i++) {
+
+  }
+});
+
