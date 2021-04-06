@@ -21,8 +21,8 @@ fetch (breedsURL)
 .then (data => {
   const breedsObject = data.message;
   const breedsArray = Object.keys(breedsObject);
-  for (let i = 0; i < breedsArray.length; i++) {
+  // for (let i = 0; i < breedsArray.length; i++) {
 
-  }
+  // }
 });
 
