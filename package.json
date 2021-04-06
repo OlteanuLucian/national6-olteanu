@@ -1,0 +1,27 @@
+{
+  "name": "national6-olteanu",
+  "version": "1.0.0",
+  "description": "project of scit",
+  "main": "script.js",
+  "scripts": {
+    "build": "webpack",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/OlteanuLucian/national6-olteanu.git"
+  },
+  "author": "lucian",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/OlteanuLucian/national6-olteanu/issues"
+  },
+  "homepage": "https://github.com/OlteanuLucian/national6-olteanu#readme",
+  "dependencies": {
+    "lodash": "^4.17.21",
+    "webpack": "^5.30.0"
+  },
+  "devDependencies": {
+    "webpack-cli": "^4.6.0"
+  }
+}
