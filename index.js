@@ -12,17 +12,24 @@ document.getElementById("logout").addEventListener("click", () => {
 
 
 const breedsURL = "https://dog.ceo/api/breeds/list/all";
-const selectBreed = document.getElementById ("breeds");
+// const selectBreed = document.getElementById ("breeds");
 
-fetch (breedsURL)
-.then(res => {
-  return res.json();
-})
-.then (data => {
-  const breedsObject = data.message;
-  const breedsArray = Object.keys(breedsObject);
-  // for (let i = 0; i < breedsArray.length; i++) {
+// fetch (breedsURL)
+// .then(res => {
+//   return res.json();
+// })
+// .then (data => {
+//   const breedsObject = data.message;
+//   const breedsArray = Object.keys(breedsObject);
+//   // for (let i = 0; i < breedsArray.length; i++) {
 
-  // }
-});
+//   // }
+// });
 
+
+
+async function start() {
+  const response = await fetch(breedsURL)
+  const data = await response.json();
+  console.log(data);
+}
