@@ -58,10 +58,6 @@ body {
     text-decoration: underline;
 }
 
-.breed:hover {
-    cursor: default;
-}
-
 #breeds {
     width: 300px;
     border-right: 1px solid lightgray;
