@@ -34,6 +34,19 @@ p {
     align-items: center;
 }
 
+.remove-button {
+    height: 15px;
+}
+
+.todo-item {
+    display: flex;
+    align-items: center;
+}
+
+.todo-item>* {
+    margin: 10px;
+}
+
 #task-name {
     margin-left: 20px;
 }

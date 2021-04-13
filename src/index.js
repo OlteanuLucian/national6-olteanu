@@ -1,10 +1,8 @@
 import { getToDoData, updateUserData, createUserData } from "./utils/api";
+import { createToDoItemList } from "./components/items";
+
 
 console.log("To Do App");
-
-const ADD_NEW_USER_URL = "https://simple-json-server-scit.herokuapp.com/todo";
-const UPDATE_TO_USER_URL =
-    "https://simple-json-server-scit.herokuapp.com/todo/sradusi";
 
 const inputTask = document.getElementById("task-name");
 
@@ -14,9 +12,10 @@ let userExist = false;
 getToDoData((json) => {
     console.log(json);
 
-    if (json.id === "sradusi") {
+    if (json.id === "lolteanu") {
         todo = json.todo;
         userExist = true;
+        createToDoItemList(json.todo);
     }
 });
 
@@ -31,14 +30,27 @@ document.getElementById("add-task-button").addEventListener("click", () => {
                 checked: false,
                 item: itemValue,
             });
-            updateUserData(todo, () => { });
+            updateUserData(todo, () => {
+                getToDoData((json) => {
+                    console.log(json);
+                    todo = json.todo;
+                    createToDoItemList(todo);
+                });
+            });
         }
     } else {
         // add user to server
         const itemValue = inputTask.value;
         if (itemValue) {
-            createUserData(itemValue, () => { });
+            createUserData(todo, () => {
+                getToDoData((json) => {
+                    console.log(json);
+                    todo = json.todo;
+                    createToDoItemList(todo);
+                });
+            });
         }
     }
+    inputTask.value = "";
 });
 
