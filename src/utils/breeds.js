@@ -1,7 +1,10 @@
+//---import from server
 import { getBreedImagesFromServer } from "./utils/api";
 
+//---global variable 
 let currentBreedImage = [];
 
+//---export functions---
 export function renderBreeds(breedList) {
     for (const breed of Object.keys(breedList.message)) {
         renderBreed(breed);
@@ -22,6 +25,7 @@ export function renderBreed(dogBreed) {
     breedName.addEventListener("click", selectBreed);
 }
 
+//---render selected breed from list
 export function selectBreed() {
     if (document.querySelector(".breed--selected")) {
         document.querySelector(".breed--selected").classList.remove("breed--selected");
@@ -33,7 +37,7 @@ export function selectBreed() {
     getBreedImagesFromServer(renderImage);
 }
 
-
+//---render images
 export function renderImage(imageResponseMessage) {
     currentBreedImage = imageResponseMessage.message;
     if (localStorage.index) {
@@ -44,6 +48,7 @@ export function renderImage(imageResponseMessage) {
     }
 }
 
+//---manipulate images 
 export function backwardImage() {
     if (document.querySelector(".breed--selected")) {
         if (localStorage.index >= 1) {
@@ -62,6 +67,7 @@ export function forwardImage() {
     }
 }
 
+//---modify page number accordingly
 function modifyPageNumber() {
     document.getElementById("page-number").innerText = "";
     document.getElementById("page-number").innerText = parseInt(localStorage.index) + 1;
