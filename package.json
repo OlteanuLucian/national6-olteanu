@@ -1,18 +1,18 @@
 {
   "name": "national6-olteanu",
   "version": "1.0.0",
-  "description": "dog app homework_modularization",
+  "description": "homework",
   "main": "index.js",
-  
   "dependencies": {
+    "cli": "^1.0.1",
     "lodash": "^4.17.21",
-    "save": "^2.4.0",
-    "webpack": "^5.30.0",
+    "webpack": "^5.32.0"
+  },
+  "devDependencies": {
     "webpack-cli": "^4.6.0"
   },
-
-  "devDependencies": {},
   "scripts": {
+    "build": "webpack",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
