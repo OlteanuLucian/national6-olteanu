@@ -3,11 +3,12 @@ import {Component} from "react";
 export class ToDoItemWithState extends Component {
     state = {
         noOfClicks:0,
+        noOfClicksOnRemove: 0,
     };
 
     handleClickIncrease = () => {
         console.log("clicked on item");
-        this.setState({noOfClicks: 1});
+        this.setState({noOfClicks: this.state.noOfClicks + 1});
     };
 
     render () {
