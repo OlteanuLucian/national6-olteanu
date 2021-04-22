@@ -16,7 +16,7 @@ export class ToDoItemWithState extends Component {
             <input type="checkbox" defaultChecked={this.props.checkValue}/>
             <p>{this.props.label}</p>
             <img 
-            src="https://www.flaticon.com/svg/vstatic/svg/3096/3096750.svg?token=exp=1618938506~hmac=0b38feb3b490026803f83d3b87074626" 
+            src="https://www.flaticon.com/svg/vstatic/svg/1632/1632602.svg?token=exp=1619107275~hmac=856c12253ff740afcb0caf5f839038e3" 
             alt="trash-bin"></img>
             <p>{this.state.noOfClicks}</p>
         </div>
