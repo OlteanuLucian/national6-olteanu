@@ -3,7 +3,7 @@ import {Component} from "react";
 export class ToDoItemWithState extends Component {
     state = {
         noOfClicks:0,
-        noOfClicksOnRemove: 0,
+        
     };
 
     handleClickIncrease = () => {
