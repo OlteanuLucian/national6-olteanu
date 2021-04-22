@@ -25,7 +25,7 @@ export class ToDoList extends Component {
     removeItem = (itemText) => {
         this.setState({
             toDoList: this.state.toDoList.filter(
-                (itemData) => itemData.item != itemText
+                (itemData) => itemData.item !== itemText
             ),
         });
     };
@@ -34,7 +34,17 @@ export class ToDoList extends Component {
         this.setState({inputValue: event.target.value });
     };
 
+    handleAddItem = () => {
+        this.setState({
+            toDoList: [{ checked:false, item: this.state.inputValue },
+                ...this.state.toDoList,
+            ],
+            inputValue: "",
+        });
+    };
+
     render() {
+        console.log(this.state);
         return ( 
         <div className="to-do-list">
             {this.state.toDoList.map((itemData, index) => ( 
@@ -51,7 +61,7 @@ export class ToDoList extends Component {
                     value= {this.state.inputValue} 
                     onChange={this.handleInputChange} 
                 />
-                <button>+</button>
+                <button onClick = {this.handleAddItem}>+</button>
             </div>
         </div>
         );
