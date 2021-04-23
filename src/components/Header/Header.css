@@ -5,3 +5,9 @@
     height: 50px;
     width: 100%;
 }
+
+.app-header--title {
+    color: white;
+    font-weight: bold;
+    margin-left: 20px;
+}
