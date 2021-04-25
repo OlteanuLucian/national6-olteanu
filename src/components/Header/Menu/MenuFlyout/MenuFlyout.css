@@ -1,23 +1,12 @@
 .app-menu-flyout {
-    background-color: white;
-    border-bottom: 1px grey;
-    border-radius: 5px;
-    border-right: 1px grey;
-    display: none;
-    left: 0px;
-    position: relative;
-    top: 0px;
-    width: 50px;
-}
-
-.app-menu-flyout--hover {
-    background-color: white;
-    border-bottom: 1px grey;
-    border-radius: 5px;
-    border-right: 1px grey;
-    /* display: inline-block; */
-    left: 0px;
-    position: relative;
-    top: 0px;
-    width: 50px;
+    position: absolute;
+    top: 35px;
+    height: 90px;
+    padding: 0 15px;
+    border-top-left-radius: 0px;
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+    border-bottom-left-radius: 8px;
+    background: white;
+    box-shadow: 1px 1px 1px lightgray;
 }
