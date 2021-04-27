@@ -1,17 +1,25 @@
 import "./ToDoItem.css";
 
-export function ToDoItem(props) {
-    // console.log(props);
+// This is a function react component
+// by using props out reusable component can adapt to attributes passed in its parent component
+// to see how this component is used check ToDoList.jsx file
+// we use "{}" to evaluate values and interpolate them in our html objects
+// every classic react component (div, p, input, etc.) use event-like attribute (onClick, onChange, onMouseDown, etc) to link a function to an event
+// in props we can pass anything from strings, bool, number to objects and functions.
+// we pass a "removeItem" method from the parent component so that when user click on trash can we trigger the "removeItem" function that is defined in "ToDoList.jsx"
 
-    return (
-        <div className ="to-do-item">
-            <input type="checkbox" defaultChecked={props.checkValue}/>
-            <p>{props.label}</p>
-            <img 
-            src="https://www.flaticon.com/svg/vstatic/svg/1632/1632602.svg?token=exp=1619107275~hmac=856c12253ff740afcb0caf5f839038e3" 
-            alt="trash-bin" 
-            onClick = {(event) => props.removeItem(props.label)}
-            />
-        </div>
-    );
+// for more info in Component and Props: https://reactjs.org/docs/components-and-props.html
+
+export function ToDoItem(props) {
+  return (
+    <div className="to-do-item">
+      <input type="checkbox" defaultChecked={props.checkValue} />
+      <p>{props.label}</p>
+      <img
+        src="https://previews.123rf.com/images/iconscart/iconscart1903/iconscart190300018/118811393-trash-icon.jpg"
+        alt="trash"
+        onClick={(event) => props.removeItem(props.label)}
+      />
+    </div>
+  );
 }

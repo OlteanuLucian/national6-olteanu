@@ -1,10 +1,10 @@
 import { Header } from "./components/Header/Header";
 import { ToDoList } from "./components/ToDoList/ToDoList";
 
-import './App.css';
+import "./App.css";
 
 function App() {
-    return (
+  return (
     <div className="App" id="app">
       <Header />
       <ToDoList />
