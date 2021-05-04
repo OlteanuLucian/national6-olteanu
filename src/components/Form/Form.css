@@ -1,7 +1,4 @@
-/* .app-form {
+.form {
     display: flex;
-    border-color: grey;
-    width: 200px;
-    height: 30px;
-    background-color: lightcoral;
-} */
+    flex-direction: column;
+}
